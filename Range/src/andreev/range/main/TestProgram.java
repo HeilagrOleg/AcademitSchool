@@ -1,4 +1,4 @@
-package andreev.range;
+package andreev.range.main;
 
 import andreev.range.scr.Range;
 

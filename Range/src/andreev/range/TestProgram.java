@@ -1,4 +1,6 @@
-import range.Range;
+package andreev.range;
+
+import andreev.range.scr.Range;
 
 import java.util.Scanner;
 
@@ -16,6 +18,7 @@ public class TestProgram {
 
         System.out.printf("Длина первого промежутка = %.1f%nДлина второго промежутка = %.1f%n",
                 firstInterval.getLength(), secondInterval.getLength());
+        System.out.println("-------");
 
         double number = 3;
         System.out.printf("Давайте проверим, попадает ли число %.1f в Ваши промежутки:%n", number);
@@ -26,6 +29,7 @@ public class TestProgram {
         } else {
             System.out.println("Увы...");
         }
+        System.out.println("-------");
 
         if (firstInterval.getIntersection(secondInterval) == null) {
             System.out.println("Промежутки не пересекаются");
@@ -33,11 +37,14 @@ public class TestProgram {
             Range intersection = firstInterval.getIntersection(secondInterval);
             System.out.printf("Промежуток пересечения (%.1f - %.1f)%n", intersection.getFrom(), intersection.getTo());
         }
+        System.out.println("-------");
 
         System.out.println("При объединении двух промежутков получаем:");
         Range.print(firstInterval.getAddition(secondInterval));
+        System.out.println("-------");
 
         System.out.println("При разности двух промежутков получаем:");
         Range.print(firstInterval.getSubtraction(secondInterval));
+        System.out.println("-------");
     }
 }

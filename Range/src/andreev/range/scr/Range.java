@@ -22,7 +22,7 @@ public class Range {
     }
 
     public Range getIntersection(Range a) {
-        if (to < a.from || a.to < from) {
+        if (to <= a.from || a.to <= from) {
             return null;
         } else {
             return new Range(Math.max(a.from, from), Math.min(a.to, to));
@@ -39,7 +39,7 @@ public class Range {
     }
 
     public Range[] getSubtraction(Range b) {
-        if (to < b.from || b.to < from) {
+        if (to <= b.from || b.to <= from) {
             return new Range[]{new Range(from, to)};
         }
         if (from < b.from) {

@@ -22,7 +22,7 @@ public class Range {
     }
 
     public Range getIntersection(Range a) {
-        if ((from > a.from && a.to < from) || (from < a.from && to < a.from)) {
+        if (to < a.from || a.to < from) {
             return null;
         } else {
             return new Range(Math.max(a.from, from), Math.min(a.to, to));
@@ -30,44 +30,36 @@ public class Range {
     }
 
     public Range[] getAddition(Range a) {
-        if ((from > a.from && a.to < from) || (from < a.from && to < a.from)) {
-            if (from > a.from) {
-                return new Range[]{new Range(a.from, a.to), new Range(from, to)};
-            } else {
-                return new Range[]{new Range(from, to), new Range(a.from, a.to)};
-            }
+        if (to < a.from || a.to < from) {
+            return new Range[]{new Range(Math.min(from, a.from), Math.min(to, a.to)),
+                    new Range(Math.max(from, a.from), Math.max(to, a.to))};
         } else {
             return new Range[]{new Range((Math.min(a.from, from)), (Math.max(a.to, to)))};
         }
     }
 
     public Range[] getSubtraction(Range b) {
-        if ((from > b.from && b.to < from) || (from < b.from && to < b.from)) {
+        if (to < b.from || b.to < from) {
             return new Range[]{new Range(from, to)};
-        } else {
-            if (from < b.from) {
-                if (to < b.to) {
-                    return new Range[]{new Range(from, b.from)};
-                } else {
-                    return new Range[]{new Range(from, b.from), new Range(b.to, to)};
-                }
+        }
+        if (from < b.from) {
+            if (to < b.to) {
+                return new Range[]{new Range(from, b.from)};
             } else {
-                if (to > b.to) {
-                    return new Range[]{new Range(b.to, to)};
-                } else {
-                    return null;
-                }
+                return new Range[]{new Range(from, b.from), new Range(b.to, to)};
+            }
+        } else {
+            if (to > b.to) {
+                return new Range[]{new Range(b.to, to)};
+            } else {
+                return new Range[]{};
             }
         }
     }
 
     public static void print(Range[] array) {
-        if (array == null) {
-            System.out.println("Промежутка нет");
-        } else {
-            for (Range e : array) {
-                System.out.printf("Промежуток (%.1f - %.1f)%n", e.getFrom(), e.getTo());
-            }
+        for (Range e : array) {
+            System.out.printf("Промежуток (%.1f - %.1f)%n", e.getFrom(), e.getTo());
         }
     }
 
